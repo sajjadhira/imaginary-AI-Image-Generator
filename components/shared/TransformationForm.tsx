@@ -56,7 +56,7 @@ const TransformationForm = ({
     useState<Transformations | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTransforming, setIsTransforming] = useState<boolean>(false);
-  const [transformationConfg, setTransformationConfg] = useState(config);
+  const [transformationConfig, setTransformationConfig] = useState(config);
 
   const [isPending, startTransition] = useTransition();
 
@@ -122,14 +122,14 @@ const TransformationForm = ({
 
   const onTransformHandler = async () => {
     setIsTransforming(true);
-    setTransformationConfg(
-      deepMergeObjects(newTransformation, transformationConfg)
+    setTransformationConfig(
+      deepMergeObjects(newTransformation, transformationConfig)
     );
 
     setNewTransformation(null);
 
     startTransition(async () => {
-      // await updateCredits(userId, creditFee);
+      await updateCredits(userId, -1);
     });
   };
 
@@ -243,7 +243,7 @@ const TransformationForm = ({
             title={form.getValues().title}
             isTransforming={isTransforming}
             setIsTransforming={setIsTransforming}
-            transformationConfg={transformationConfg}
+            transformationConfig={transformationConfig}
           />
         </div>
 
